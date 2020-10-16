@@ -1,0 +1,17 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t tmbks/web-client -f ./web-client/Dockerfile.dev .
+
+after_success:
+  - docker build -t tmbksa/web-client ./web-client
+  - docker build -t tmbksa/web-nginx .
+  - docker build -t tmbksa/web-server ./server
+  - docker build -t tmbksa/web-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push tmbksa/web-client
+  - docker push tmbksa/web-nginx
+  - docker push tmbksa/web-server
+  - docker push tmbksa/web-worker
