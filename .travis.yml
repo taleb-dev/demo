@@ -2,6 +2,8 @@ sudo: required
 services:
   - docker
 
+before_install:
+  - echo hi
 
 after_success:
   - docker build -t tmbksa/web-client ./web-client
