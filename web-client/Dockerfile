@@ -1,7 +1,7 @@
 FROM node:alpine
 WORKDIR '/app'
 
-COPY ./package.json ./
+COPY ./web-client/package.json ./
 
 RUN yarn install
 
